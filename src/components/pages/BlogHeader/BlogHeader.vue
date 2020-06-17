@@ -106,7 +106,7 @@ export default {
     },
     logout () {
       this.$store.dispatch('Logout').then((res) => {
-        if (res.data.errorCode === 0) {
+        if (res.data.code === 0) {
           this.isShowUser = false
           this.$message({
             message: '已退出',

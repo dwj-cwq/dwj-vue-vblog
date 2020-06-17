@@ -89,8 +89,8 @@ export default {
         this.isPassVerify = false
       } else {
         this.axios.post(this.captchaVerifyUrl, qs.stringify({ captcha: this.verificationCode }),
-          {headers: {'Content-Type': 'application/x-www-form-urlencoded'}}).then(response => {
-          this.isPassVerify = response.data.errorCode === 0
+          {headers: {'Content-Type': 'application/json'}}).then(response => {
+          this.isPassVerify = response.data.code === 0
         }).catch(error => {
           this.isPassVerify = false
           console.log(error)
@@ -124,7 +124,7 @@ export default {
     },
     async VerifyAndSetCookie (loginForm) {
       let res = await this.$store.dispatch('Login', loginForm)
-      if (res.data.errorCode !== 0) {
+      if (res.data.code !== 0) {
         this.$message.error(res.data.errorMsg)
       } else {
         await this.$store.dispatch('GetInfo')

@@ -3,13 +3,9 @@
 搭建一个可动态发布博客的单页面应用。实现了在线写文章、根据关键词搜索、按标签搜索、按热度搜索等功能，前端框架vue，后端框架spring boot。
 前端项目运行需要相应的后台的支持。
 
-## 演示地址
-
-[个人blog站点](https://www.remango.cn/blog/#/index)
-
 ## 后端代码地址
 
-[后端代码导航](https://github.com/REmango/spring-boot-blog)
+[后端代码导航](https://github.com/648752437/spring-boot-vblog.git)
 
 ## 主要技术栈
 
@@ -85,7 +81,7 @@
 ## 开发
 
 ```
-git clone https://github.com/REmango/vue-blog.git
+git clone https://github.com/648752437/dwj-vblog-web.git
 
 cd vue-blog
 

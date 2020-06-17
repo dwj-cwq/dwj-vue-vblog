@@ -168,7 +168,7 @@ export default {
       this.$refs['messageBoardForm'].validate((valid) => {
         if (valid) {
           this.axios.post(this.saveMessageBoardUrl, qs.stringify(message), {headers: {'Content-Type': 'application/x-www-form-urlencoded'}}).then(response => {
-            if (response.data.errorCode === 0) {
+            if (response.data.code === 0) {
               this.messageBoardForm.username = ''
               this.messageBoardForm.replyMessage = ''
               this.$message({

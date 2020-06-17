@@ -11,8 +11,8 @@ const service = axios.create({
 service.interceptors.response.use(
   response => {
     const res = response.data
-    if (res.errorCode !== 0) {
-      if (res.errorCode === 1004) {
+    if (res.code !== 0) {
+      if (res.code === 1004) {
         // 清除登录信息
         store.dispatch('FedLogOut').then(() => {
           router.replace({

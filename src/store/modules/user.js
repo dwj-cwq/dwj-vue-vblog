@@ -19,7 +19,7 @@ const user = {
       const username = userInfo.username.trim()
       return new Promise((resolve, reject) => {
         login(username, userInfo.password).then(response => {
-          if (response.data.errorCode === 0) {
+          if (response.data.code === 0) {
             setToken(username)
             commit('SET_TOKEN', username)
           }
@@ -49,7 +49,7 @@ const user = {
     Logout ({ commit }) {
       return new Promise((resolve, reject) => {
         logout().then(response => {
-          if (response.data.errorCode === 0) {
+          if (response.data.code === 0) {
             commit('SET_TOKEN', '')
             removeAvatar()
             removeToken()
