@@ -1,4 +1,4 @@
-import { login, getInfo, logout } from '@/api/getUserInfo'
+import restapi from '@/utils/restapi'
 import { getToken, setToken, removeToken } from '@/utils/auth'
 import { setAvatar, removeAvatar } from '@/utils/avatar'
 const user = {
@@ -18,45 +18,55 @@ const user = {
     Login ({ commit }, userInfo) {
       const username = userInfo.username.trim()
       return new Promise((resolve, reject) => {
-        login(username, userInfo.password).then(response => {
-          if (response.data.code === 0) {
-            setToken(username)
-            commit('SET_TOKEN', username)
-          }
-          resolve(response)
-        }).catch(error => {
-          reject(error)
+        return restapi.request({
+          method: 'post',
+          url: `/api/login`,
+          data: userInfo,
+          success: res => {
+            if (res.data.code === 0) {
+              setToken(username)
+              commit('SET_TOKEN', username)
+              resolve(res)
+            }
+          },
+          error: reject
         })
       })
     },
     // 获取用户信息
     GetInfo () {
       return new Promise((resolve, reject) => {
-        getInfo().then(response => {
-          if (response.data.data) {
-            setAvatar(response.data.data.avatarUrl)
-          } else {
-            removeAvatar()
-            removeToken()
-          }
-          resolve(response)
-        }).catch(error => {
-          reject(error)
+        return restapi.request({
+          method: 'get',
+          url: `/api/getCurrentUser`,
+          success: res => {
+            if (res.data.data) {
+              setAvatar(res.data.data.avatarUrl)
+            } else {
+              removeAvatar()
+              removeToken()
+            }
+            resolve(res)
+          },
+          error: reject
         })
       })
     },
     // 后端 登出
     Logout ({ commit }) {
       return new Promise((resolve, reject) => {
-        logout().then(response => {
-          if (response.data.code === 0) {
-            commit('SET_TOKEN', '')
-            removeAvatar()
-            removeToken()
-          }
-          resolve(response)
-        }).catch(error => {
-          reject(error)
+        return restapi.request({
+          method: 'get',
+          url: `/api/logout`,
+          success: res => {
+            if (res.data.code === 0) {
+              commit('SET_TOKEN', '')
+              removeAvatar()
+              removeToken()
+            }
+            resolve(res)
+          },
+          error: reject
         })
       })
     },

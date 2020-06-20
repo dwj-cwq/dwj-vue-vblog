@@ -1,4 +1,4 @@
-# remango-blog
+# vblog
 
 搭建一个可动态发布博客的单页面应用。实现了在线写文章、根据关键词搜索、按标签搜索、按热度搜索等功能，前端框架vue，后端框架spring boot。
 前端项目运行需要相应的后台的支持。
@@ -66,15 +66,15 @@
 
 #### 文章阅读界面
 
-<img src="https://github.com/REmango/vue-blog/blob/master/screenshot/article.png" width="500" height="250"/>
+<img src="https://github.com/648752437/dwj-vue-vblog/blob/master/screenshot/article.png" width="500" height="250"/>
 
 #### 首页
 
-<img src="https://github.com/REmango/vue-blog/blob/master/screenshot/index.png" width="500" height="250"/>
+<img src="https://github.com/648752437/dwj-vue-vblog/blob/master/screenshot/index.png" width="500" height="250"/>
 
 #### 登录界面
 
-<img src="https://github.com/REmango/vue-blog/blob/master/screenshot/login.png" width="500" height="250"/>
+<img src="https://github.com/648752437/dwj-vue-vblog/blob/master/screenshot/login.png" width="500" height="250"/>
 
 
 

@@ -70,8 +70,8 @@ export default {
         articleId: null,
         author: null
       },
-      queryArticleByIdAuthorUrl: '/blog/queryArticleByIdAuthor',
-      queryArticleInfoByIdUrl: '/blog/queryArticleInfoById'
+      queryArticleByIdAuthorUrl: '/article/queryArticleByIdAuthor',
+      queryArticleInfoByIdUrl: '/article/queryArticleInfoById'
     }
   },
   mounted () {

@@ -10,7 +10,7 @@
     <div class="login-container">
       <div class="login-box">
         <div class="login-title">
-          <h2>Remango-Blog 登录平台</h2>
+          <h2>dwj-vBlog 登录平台</h2>
           <p>基于element-ui的极致体验</p>
         </div>
         <div class="login-form-wrapper">
@@ -57,12 +57,12 @@
 </template>
 
 <script>
-import qs from 'qs'
 import {sha256} from 'js-sha256'
 export default {
   name: 'login',
   data () {
-    let staticImgUrl = '/blog/captcha/get?'
+    let staticImgUrl = '/captcha/get?'
+    let baseUrl = process.env.RESTAPI_PREFIX
     return {
       loginForm: {
         username: '',
@@ -70,9 +70,9 @@ export default {
       },
       verificationCode: '',
       isPassVerify: false,
-      staticImgUrl: staticImgUrl,
+      staticImgUrl: baseUrl + staticImgUrl,
       imgUrl: staticImgUrl + (new Date()).getTime(),
-      captchaVerifyUrl: '/blog/captcha/verify',
+      captchaVerifyUrl: '/captcha/verify/',
       rules: {
         username: [
           { required: true, message: '输入不能为空', trigger: 'change' }
@@ -88,7 +88,7 @@ export default {
       if (newValue.length < 5) {
         this.isPassVerify = false
       } else {
-        this.axios.post(this.captchaVerifyUrl, qs.stringify({ captcha: this.verificationCode }),
+        this.axios.post(this.captchaVerifyUrl + this.verificationCode,
           {headers: {'Content-Type': 'application/json'}}).then(response => {
           this.isPassVerify = response.data.code === 0
         }).catch(error => {

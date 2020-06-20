@@ -69,7 +69,7 @@ export default {
       intervalId: null,
       dialogVisible: false,
       articleTypeList: [{type: '原创'}, {type: '转载'}],
-      getCurrentUserUrl: '/blog/getCurrentUser',
+      getCurrentUserUrl: '/user/getCurrentUser',
       articleInfoForm: {
         checkedTags: [],
         author: '',
@@ -86,7 +86,7 @@ export default {
           { required: true, message: '请选择文章类型', trigger: 'change' }
         ]
       },
-      publishArticleUrl: '/blog/publishArticle'
+      publishArticleUrl: '/article/publishArticle'
     }
   },
   computed: {
@@ -104,11 +104,11 @@ export default {
   },
   methods: {
     loadCache () {
-      this.$refs.markdownText.innerText = utils.fetchData('remango-blog')
+      this.$refs.markdownText.innerText = utils.fetchData('vblog')
     },
     articleCache () {
       this.intervalId = setInterval(() => {
-        utils.saveData('remango-blog', this.$refs.markdownText.innerText)
+        utils.saveData('vblog', this.$refs.markdownText.innerText)
       }, 5000)
     },
     initMarkdown () {
@@ -127,7 +127,7 @@ export default {
         htmlDecode: true, // 不过滤标签
         imageUpload: true, // 上传图片
         imageFormats: ['jpg', 'jpeg', 'gif', 'png', 'bmp', 'webp', 'JPG', 'JPEG', 'GIF', 'PNG', 'BMP', 'WEBP'],
-        imageUploadURL: '/blog/uploadImage',
+        imageUploadURL: '/api/article/uploadImage',
         onload: function () {
           // console.log('onload', this);
         },
@@ -183,7 +183,7 @@ export default {
             this.articleTitle = ''
             this.resetForm('articleInfoForm')
             this.$refs.markdownText.innerText = ''
-            utils.saveData('remango-blog', '')
+            utils.saveData('vblog', '')
             this.dialogVisible = false
             this.$alert('已发布，前往首页！', '提示', {
               confirmButtonText: '确定',
