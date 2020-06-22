@@ -61,8 +61,8 @@ import {sha256} from 'js-sha256'
 export default {
   name: 'login',
   data () {
-    let staticImgUrl = '/captcha/get?'
     let baseUrl = process.env.RESTAPI_PREFIX
+    let staticImgUrl = baseUrl + '/captcha/get?'
     return {
       loginForm: {
         username: '',
@@ -70,7 +70,7 @@ export default {
       },
       verificationCode: '',
       isPassVerify: false,
-      staticImgUrl: baseUrl + staticImgUrl,
+      staticImgUrl: staticImgUrl,
       imgUrl: staticImgUrl + (new Date()).getTime(),
       captchaVerifyUrl: '/captcha/verify/',
       rules: {
@@ -118,7 +118,7 @@ export default {
             password: ''
           }
           userData.username = this.loginForm.username
-          userData.password = sha256(this.loginForm.password).toString()
+          userData.password = sha256(this.loginForm.password)
           this.VerifyAndSetCookie(userData).then(res => {
           }).catch(error => {
             this.refreshImg()
