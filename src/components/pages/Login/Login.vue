@@ -129,6 +129,7 @@ export default {
     },
     async VerifyAndSetCookie (loginForm) {
       let res = await this.$store.dispatch('Login', loginForm)
+      console.log(res)
       if (res.data.code !== 0) {
         this.$message.error(res.data.errorMsg)
       } else {

@@ -15,63 +15,63 @@ const user = {
   },
   actions: {
     // 登录
-    Login ({ commit }, userInfo) {
+    Login: ({ commit }, userInfo) => {
       const username = userInfo.username.trim()
       return new Promise((resolve, reject) => {
         return request({
           method: 'post',
           url: `/user/login`,
-          data: userInfo,
-          success: res => {
-            if (res.data.code === 0) {
-              setToken(username)
-              commit('SET_TOKEN', username)
-              resolve(res)
-            }
-          },
-          error: reject
+          data: userInfo
+        }).then(res => {
+          if (res.data.code === 0) {
+            setToken(username)
+            commit('SET_TOKEN', username)
+          }
+          resolve(res)
+        }).catch(error => {
+          reject(error)
         })
       })
     },
     // 获取用户信息
-    GetInfo () {
+    GetInfo: () => {
       return new Promise((resolve, reject) => {
         return request({
           method: 'get',
-          url: `/user/getCurrentUser`,
-          success: res => {
-            if (res.data.data) {
-              setAvatar(res.data.data.avatarUrl)
-            } else {
-              removeAvatar()
-              removeToken()
-            }
-            resolve(res)
-          },
-          error: reject
+          url: `/user/getCurrentUser`
+        }).then(res => {
+          if (res.data.data) {
+            setAvatar(res.data.data.avatarUrl)
+          } else {
+            removeAvatar()
+            removeToken()
+          }
+          resolve(res)
+        }).catch(error => {
+          reject(error)
         })
       })
     },
     // 后端 登出
-    Logout ({ commit }) {
+    Logout: ({ commit }) => {
       return new Promise((resolve, reject) => {
         return request({
           method: 'get',
-          url: `/user/logout`,
-          success: res => {
-            if (res.data.code === 0) {
-              commit('SET_TOKEN', '')
-              removeAvatar()
-              removeToken()
-            }
-            resolve(res)
-          },
-          error: reject
+          url: `/user/logout`
+        }).then(res => {
+          if (res.data.code === 0) {
+            commit('SET_TOKEN', '')
+            removeAvatar()
+            removeToken()
+          }
+          resolve(res)
+        }).catch(error => {
+          reject(error)
         })
       })
     },
     // 前端 登出
-    FedLogOut ({ commit }) {
+    FedLogOut: ({ commit }) => {
       return new Promise(resolve => {
         commit('SET_TOKEN', '')
         removeAvatar()
