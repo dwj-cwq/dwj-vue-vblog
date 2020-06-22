@@ -113,8 +113,13 @@ export default {
     loginSystem (formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
-          this.loginForm.password = sha256(this.loginForm.password + this.loginForm.username)
-          this.VerifyAndSetCookie(this.loginForm).then(res => {
+          let userData = {
+            username: '',
+            password: ''
+          }
+          userData.username = this.loginForm.username
+          userData.password = sha256(this.loginForm.password).toString()
+          this.VerifyAndSetCookie(userData).then(res => {
           }).catch(error => {
             this.refreshImg()
             if (error.data) this.$message.error(error.data.errorMsg)

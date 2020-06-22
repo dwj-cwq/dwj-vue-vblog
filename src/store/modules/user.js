@@ -1,4 +1,4 @@
-import restapi from '@/utils/restapi'
+import request from '@/utils/request'
 import { getToken, setToken, removeToken } from '@/utils/auth'
 import { setAvatar, removeAvatar } from '@/utils/avatar'
 const user = {
@@ -18,9 +18,9 @@ const user = {
     Login ({ commit }, userInfo) {
       const username = userInfo.username.trim()
       return new Promise((resolve, reject) => {
-        return restapi.request({
+        return request({
           method: 'post',
-          url: `/api/login`,
+          url: `/user/login`,
           data: userInfo,
           success: res => {
             if (res.data.code === 0) {
@@ -36,9 +36,9 @@ const user = {
     // 获取用户信息
     GetInfo () {
       return new Promise((resolve, reject) => {
-        return restapi.request({
+        return request({
           method: 'get',
-          url: `/api/getCurrentUser`,
+          url: `/user/getCurrentUser`,
           success: res => {
             if (res.data.data) {
               setAvatar(res.data.data.avatarUrl)
@@ -55,9 +55,9 @@ const user = {
     // 后端 登出
     Logout ({ commit }) {
       return new Promise((resolve, reject) => {
-        return restapi.request({
+        return request({
           method: 'get',
-          url: `/api/logout`,
+          url: `/user/logout`,
           success: res => {
             if (res.data.code === 0) {
               commit('SET_TOKEN', '')
