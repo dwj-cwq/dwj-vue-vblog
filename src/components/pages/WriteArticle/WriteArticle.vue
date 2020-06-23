@@ -148,7 +148,7 @@ export default {
           })
           return
         }
-        this.articleInfoForm.author = response.data.data.username
+        this.articleInfoForm.author = response.data.data.userName
         if (!this.$refs.markdownContent.innerText || !this.articleTitle) {
           this.$alert('请填写标题或文章内容', '提示', {
             confirmButtonText: '确定',

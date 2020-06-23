@@ -11,6 +11,7 @@
         <div class="login-register-wrapper" >
           <a class="avatar" v-if="isShowUser">
             <img :src="avatarUrl"/>
+            <div class="username">"userName"</div>
             <div class="avatar-dropdown">
               <div class="dropdown-wrapper">
                 <div class="triangle">
@@ -94,7 +95,8 @@ export default {
       articleData: '',
       isShowSearchInput: false,
       isShowUser: false,
-      avatarUrl: ''
+      avatarUrl: '',
+      username: ''
     }
   },
   mounted () {
@@ -122,6 +124,7 @@ export default {
       this.isShowSearchInput = this.$route.name === 'index'
       if (getToken()) {
         this.isShowUser = true
+        this.username = getToken()
       }
     },
     toLoginPage () {
@@ -195,6 +198,13 @@ export default {
       border-color: transparent transparent #999;
     }
     img{
+      height: 40px;
+      line-height: 40px;
+      width: 40px;
+      border-radius: 50%;
+      border: 1px solid #eee;
+    }
+    .username{
       height: 40px;
       line-height: 40px;
       width: 40px;

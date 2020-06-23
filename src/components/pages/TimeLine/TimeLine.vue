@@ -53,7 +53,7 @@ export default {
     return {
       isActive: false,
       getTimeLineUrl: '/timeline/getTimeline',
-      queryArticleListByTimeLineUrl: '/timeline/queryArticleListByTimeLine',
+      queryArticleListByTimeLineUrl: '/article/queryArticleListByTimeLine',
       timeLineTotal: 0,
       timeLineCurrentPage: 1,
       timeLinePageSize: 5,
