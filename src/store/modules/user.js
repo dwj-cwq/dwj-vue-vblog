@@ -56,7 +56,7 @@ const user = {
     Logout: ({ commit }) => {
       return new Promise((resolve, reject) => {
         return request({
-          method: 'get',
+          method: 'post',
           url: `/user/logout`
         }).then(res => {
           if (res.data.code === 0) {

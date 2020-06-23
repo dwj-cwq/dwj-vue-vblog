@@ -11,16 +11,16 @@
         <div class="login-register-wrapper" >
           <a class="avatar" v-if="isShowUser">
             <img :src="avatarUrl"/>
-            <div class="username">"userName"</div>
             <div class="avatar-dropdown">
               <div class="dropdown-wrapper">
                 <div class="triangle">
                 </div>
                 <div class="dropdown-content">
                   <ul>
+                    <li class="user-item"><i class="icon iconfont icon-user-s"></i>{{username}}</li>
                     <li class="user-item"><a href="#"><i class="icon iconfont icon-iconset"></i>账号设置</a></li>
                     <li class="user-item"><a href="#"><i class="icon iconfont icon-shuju"></i>后台管理</a></li>
-                    <li class="user-item"><a href="#" @click="logout"><i class="icon iconfont icon-tuichu"></i>退出系统</a></li>
+                    <li class="user-item"><a href="#" @click="logout"><i class="icon iconfont icon-tuichu"></i>注销</a></li>
                   </ul>
                 </div>
               </div>
@@ -208,8 +208,6 @@ export default {
       height: 40px;
       line-height: 40px;
       width: 40px;
-      border-radius: 50%;
-      border: 1px solid #eee;
     }
     .avatar-dropdown{
       position: absolute;
@@ -227,7 +225,7 @@ export default {
       height: 120px;
       .dropdown-content{
         visibility: visible;
-        height: 120px;
+        height: 160px;
       }
     }
     .dropdown-wrapper{
