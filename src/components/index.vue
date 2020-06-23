@@ -175,6 +175,9 @@ export default {
     toLoginPage () {
       this.$router.push({name: 'login'})
     },
+    toSignUpPage () {
+      this.$router.push({name: 'signUp'})
+    },
     handleSizeChange (val) {
       this.pagination.pageSize = val
       this.getArticle()

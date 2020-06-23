@@ -28,7 +28,7 @@
           </a>
           <span v-if="!isShowUser">
           <el-button size="medium" class="nav-btn" @click="toLoginPage()">登录</el-button>
-          <el-button size="medium" class="nav-btn">注册</el-button>
+          <el-button size="medium" class="nav-btn" @click="toSignUpPage()">注册</el-button>
         </span>
         </div>
         <div class="main-container center-nav">
@@ -78,6 +78,9 @@
         </li>
         <li class="nav-menu">
           <router-link :to="{ name: 'login'}" class="nav-menu-link"><i class="icon iconfont icon-denglu"></i>登录</router-link>
+        </li>
+        <li class="nav-menu">
+          <router-link :to="{ name: 'signUp'}" class="nav-menu-link"><i class="icon iconfont icon-yonghu"></i>注册</router-link>
         </li>
       </ul>
     </div>
@@ -132,6 +135,9 @@ export default {
     },
     searchArticlesByKey () {
       if (this.$route.name === 'index') this.$emit('searchArticlesByKey', this.articleData)
+    },
+    toSignUpPage () {
+      this.$router.push({name: 'signUp'})
     }
   }
 }
@@ -163,7 +169,7 @@ export default {
     }
   }
   .open-menu.nav-menu-wrapper{
-    height: 280px;
+    height: 330px;
     visibility: visible;
     transition: all .6s linear;
   }
