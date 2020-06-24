@@ -54,6 +54,7 @@
                   :prefix-icon="isPassVerify? 'fa fa-check': 'fa fa-lock'"
                   v-model="signUpForm.password1">
                 </el-input>
+                <i v-if="warn">两次输入的密码不同，请重新输入！</i>
               </el-form-item>
               <el-form-item>
                 <el-button type="primary" @click="signUpSystem('signUpForm')" class="signUp-button">Sign up</el-button>
@@ -75,6 +76,7 @@ export default {
       mageUploadURL: '/api/article/uploadImage',
       signUpUrl: '/user/signUp',
       isPassVerify: false,
+      warn: false,
       signUpForm: {
         userName: '',
         email: '',
@@ -108,16 +110,21 @@ export default {
   methods: {
     signUpSystem (formName) {
       this.$refs[formName].validate(valid => {
-        if (valid && this.signUpForm.password1 === this.signUpForm.userPassword) {
-          this.isPassVerify = true
-          this.axios.post(this.signUpUrl, this.signUpForm,
-            {headers: {'Content-Type': 'application/json'}}).then(response => {
-            if (response.data.code === 0) {
-              this.$router.push({name: 'login'})
-            }
-          }).catch(error => {
-            console.log(error)
-          })
+        if (valid) {
+          if (this.signUpForm.password1 !== this.signUpForm.userPassword) {
+            this.warn = true
+          } else {
+            this.isPassVerify = true
+            this.warn = false
+            this.axios.post(this.signUpUrl, this.signUpForm,
+              {headers: {'Content-Type': 'application/json'}}).then(response => {
+              if (response.data.code === 0) {
+                this.$router.push({name: 'login'})
+              }
+            }).catch(error => {
+              console.log(error)
+            })
+          }
         }
       })
     }
