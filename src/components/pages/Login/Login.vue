@@ -5,6 +5,11 @@
         <div class="logo-wrapper clearfix">
           <router-link :to="{ name: 'index'}" class="logo">博客</router-link>
         </div>
+        <div class="login-register-wrapper" >
+          <span>
+            <el-button size="medium" class="nav-btn" @click="toSignUpPage()">注册</el-button>
+          </span>
+        </div>
       </div>
     </nav>
     <div class="login-container">
@@ -136,6 +141,9 @@ export default {
         await this.$store.dispatch('GetInfo')
         this.$router.push({name: 'index'})
       }
+    },
+    toSignUpPage () {
+      this.$router.push({name: 'signUp'})
     }
   }
 }

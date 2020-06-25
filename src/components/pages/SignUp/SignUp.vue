@@ -25,7 +25,7 @@
                   placeholder="用户名"
                   prefix-icon="fa-user fa"
                   v-model="signUpForm.userName">
-                </el-input>
+                </el-input> <i class="warn" v-if="nameWarn">用户名已被使用！</i>
               </el-form-item>
               <el-form-item prop="email">
                 <el-input
@@ -77,6 +77,7 @@ export default {
       signUpUrl: '/user/signUp',
       isPassVerify: false,
       warn: false,
+      nameWarn: false,
       signUpForm: {
         userName: '',
         email: '',
@@ -122,6 +123,9 @@ export default {
                 this.$router.push({name: 'login'})
               }
             }).catch(error => {
+              if (error.data.code === 1009) {
+                this.nameWarn = true
+              }
               console.log(error)
             })
           }
@@ -185,6 +189,9 @@ export default {
         padding: 20px;
         .signUp-input{
           width: 100%;
+        }
+        .warn{
+          font-color: red;
         }
         .signUp-button{
           color: #FFF;
