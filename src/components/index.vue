@@ -14,26 +14,28 @@
           <div class="blog-content-wrapper" >
             <ul class="blog-list" v-if="articlesList.length > 0">
               <li class="blog-item" v-for="article in articlesList" :key="article.id">
-                <a class="blog-title" @click="toArticleContentPage(article.articleId, article.author)">{{article.articleTitle}}</a>
-                <div class="blog-info">
-                <span class="blog-info-item">
-                  <i class="icon iconfont icon-yonghutouxiang"></i> {{article.author}}
-                </span>
-                  <span class="blog-info-item" v-if="article.createTime">
-                  <i class="icon iconfont icon-rili1"></i> {{getFormatCN(article.createTime)}}
-                </span>
+                <el-card class="box-card" shadow="hover">
+                  <a class="blog-title" @click="toArticleContentPage(article.articleId, article.author)">{{article.articleTitle}}</a>
+                  <div class="blog-info">
                   <span class="blog-info-item">
-                  <i class="icon iconfont icon-biaoqian"></i> {{getCategoriesList(article.categories)}}
-                </span>
-                </div>
-                <p class="blog-summary">{{article.summary + '...'}}
-                </p>
+                    <i class="icon iconfont icon-yonghutouxiang"></i> {{article.author}}
+                  </span>
+                    <span class="blog-info-item" v-if="article.createTime">
+                    <i class="icon iconfont icon-rili1"></i> {{getFormatDate(article.createTime)}}
+                  </span>
+                    <span class="blog-info-item">
+                    <i class="icon iconfont icon-biaoqian"></i> {{getCategoriesList(article.categories)}}
+                  </span>
+                  </div>
+                  <p class="blog-summary">{{article.summary + '...'}}
+                  </p>
+                </el-card>
               </li>
             </ul>
             <div v-else>{{searchMsg}}</div>
           </div>
           <div class="blog-sidebar-wrapper">
-            <el-card class="box-card" shadow="never">
+            <el-card class="box-card" shadow="hover">
               <div slot="header" class="clearfix">
                 <span>常用标签</span>
               </div>
@@ -45,7 +47,7 @@
                 </ul>
               </div>
             </el-card>
-            <el-card class="box-card" shadow="never">
+            <el-card class="box-card" shadow="hover">
               <div slot="header" class="clearfix">
                 <span>今日份鸡汤</span>
               </div>
@@ -93,7 +95,7 @@
 
 <script>
 import canvas from '@/common/js/rain'
-import {getFormatCN} from '@/utils/formatData'
+import {getFormatDate} from '@/utils/formatData'
 import {getQuotes} from '@/utils/randomGenerate'
 import blogFooter from './pages/BlogFooter/BlogFooter'
 import blogHeader from './pages/BlogHeader/BlogHeader'
@@ -189,8 +191,8 @@ export default {
     getCategoriesList (Categories) {
       return Categories.split(',').join('   ')
     },
-    getFormatCN (time) {
-      return getFormatCN(time)
+    getFormatDate (time) {
+      return getFormatDate(time)
     },
     openMenu () {
       this.isOpenMenu = true
@@ -267,6 +269,10 @@ export default {
       margin-left: 6%;
       .box-card{
         margin-bottom: 30px;
+        border-radius: 4%;
+        border: 1px solid #eee;
+        transition: box-shadow 0.3s;
+        -webkit-transition: box-shadow 0.3s;
       }
       .quote{
         text-indent: 2em;

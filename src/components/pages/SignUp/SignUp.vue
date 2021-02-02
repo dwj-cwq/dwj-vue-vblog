@@ -165,8 +165,8 @@ export default {
           width: 100px;
           border-radius: 50%;
           border: 1px solid #eee;
-          transition: box-shadow 0.5s;
-          -webkit-transition: box-shadow 0.5s;
+          transition: box-shadow 0.3s;
+          -webkit-transition: box-shadow 0.3s;
         }
       }
       .avatar img:hover{
