@@ -9,7 +9,12 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
+const GitRevisionPlugin = require('git-revision-webpack-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+
+const gitRevisionPlugin = new GitRevisionPlugin({
+  versionCommand: 'describe --always --dirty'
+})
 
 const env = process.env.NODE_ENV === 'testing'
   ? require('../config/test.env')
@@ -32,7 +37,10 @@ const webpackConfig = merge(baseWebpackConfig, {
   plugins: [
     // http://vuejs.github.io/vue-loader/en/workflow/production.html
     new webpack.DefinePlugin({
-      'process.env': env
+      'process.env': env,
+      'process.git.commithash': JSON.stringify(gitRevisionPlugin.commithash()),
+      'process.git.version': JSON.stringify(gitRevisionPlugin.version()),
+      'process.git.branch': JSON.stringify(gitRevisionPlugin.branch())
     }),
     new UglifyJsPlugin({
       uglifyOptions: {
@@ -68,6 +76,7 @@ const webpackConfig = merge(baseWebpackConfig, {
         : config.build.index,
       template: 'index.html',
       inject: true,
+      production: process.env.NODE_ENV === 'production',
       minify: {
         removeComments: true,
         collapseWhitespace: true,

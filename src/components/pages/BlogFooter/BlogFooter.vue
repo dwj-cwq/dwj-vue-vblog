@@ -1,9 +1,9 @@
 <template>
   <div class="footer-wrapper">
     <div class="main-container footer-container">
-      <div class="info">© 2019 remango个人博客网站  <span class="version">version 1.0.0</span></div>
+      <div class="info">© 2019 dwj 个人博客网站  <span class="version">version 1.0.0</span></div>
       <div class="connect-me-wrapper">
-        <a class="connect-me" href="https://github.com/REmango" target="_blank"><i class="icon iconfont icon-github"></i></a>
+        <a class="connect-me" href="https://github.com/dwj-cwq" target="_blank"><i class="icon iconfont icon-github"></i></a>
         <a class="connect-me" @click="openMenu"><i class="icon iconfont icon-yonghu"></i><span class="about-me">about me</span></a>
       </div>
     </div>

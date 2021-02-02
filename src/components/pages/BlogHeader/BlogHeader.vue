@@ -17,9 +17,10 @@
                 </div>
                 <div class="dropdown-content">
                   <ul>
+                    <li class="user-item"><i class="icon iconfont icon-user-s"></i>{{username}}</li>
                     <li class="user-item"><a href="#"><i class="icon iconfont icon-iconset"></i>账号设置</a></li>
                     <li class="user-item"><a href="#"><i class="icon iconfont icon-shuju"></i>后台管理</a></li>
-                    <li class="user-item"><a href="#" @click="logout"><i class="icon iconfont icon-tuichu"></i>退出系统</a></li>
+                    <li class="user-item"><a href="#" @click="logout"><i class="icon iconfont icon-tuichu"></i>注销</a></li>
                   </ul>
                 </div>
               </div>
@@ -27,7 +28,7 @@
           </a>
           <span v-if="!isShowUser">
           <el-button size="medium" class="nav-btn" @click="toLoginPage()">登录</el-button>
-          <el-button size="medium" class="nav-btn">注册</el-button>
+          <el-button size="medium" class="nav-btn" @click="toSignUpPage()">注册</el-button>
         </span>
         </div>
         <div class="main-container center-nav">
@@ -78,6 +79,9 @@
         <li class="nav-menu">
           <router-link :to="{ name: 'login'}" class="nav-menu-link"><i class="icon iconfont icon-denglu"></i>登录</router-link>
         </li>
+        <li class="nav-menu">
+          <router-link :to="{ name: 'signUp'}" class="nav-menu-link"><i class="icon iconfont icon-yonghu"></i>注册</router-link>
+        </li>
       </ul>
     </div>
   </div>
@@ -94,7 +98,8 @@ export default {
       articleData: '',
       isShowSearchInput: false,
       isShowUser: false,
-      avatarUrl: ''
+      avatarUrl: '',
+      username: ''
     }
   },
   mounted () {
@@ -122,6 +127,7 @@ export default {
       this.isShowSearchInput = this.$route.name === 'index'
       if (getToken()) {
         this.isShowUser = true
+        this.username = getToken()
       }
     },
     toLoginPage () {
@@ -129,6 +135,9 @@ export default {
     },
     searchArticlesByKey () {
       if (this.$route.name === 'index') this.$emit('searchArticlesByKey', this.articleData)
+    },
+    toSignUpPage () {
+      this.$router.push({name: 'signUp'})
     }
   }
 }
@@ -160,7 +169,7 @@ export default {
     }
   }
   .open-menu.nav-menu-wrapper{
-    height: 280px;
+    height: 330px;
     visibility: visible;
     transition: all .6s linear;
   }
@@ -201,6 +210,11 @@ export default {
       border-radius: 50%;
       border: 1px solid #eee;
     }
+    .username{
+      height: 40px;
+      line-height: 40px;
+      width: 40px;
+    }
     .avatar-dropdown{
       position: absolute;
       height: 0;
@@ -217,7 +231,7 @@ export default {
       height: 120px;
       .dropdown-content{
         visibility: visible;
-        height: 120px;
+        height: 160px;
       }
     }
     .dropdown-wrapper{

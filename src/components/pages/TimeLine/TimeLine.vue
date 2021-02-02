@@ -52,8 +52,8 @@ export default {
   data () {
     return {
       isActive: false,
-      getTimeLineUrl: '/blog/getTimeline',
-      queryArticleListByTimeLineUrl: '/blog/queryArticleListByTimeLine',
+      getTimeLineUrl: '/timeline/getTimeline',
+      queryArticleListByTimeLineUrl: '/article/queryArticleListByTimeLine',
       timeLineTotal: 0,
       timeLineCurrentPage: 1,
       timeLinePageSize: 5,

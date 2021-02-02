@@ -29,5 +29,6 @@ module.exports = {
   globals: {
     editormd: true,
     $: true,
+    'CONFIG': false
   }
 }

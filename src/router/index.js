@@ -5,6 +5,7 @@ import pageNoFound from '../components/pages/404/PageNoFound'
 import index from '../components/index'
 import writeArticle from '../components/pages/WriteArticle/WriteArticle'
 import login from '../components/pages/Login/Login'
+import signUp from '../components/pages/SignUp/SignUp'
 import articleContent from '../components/pages/ArticleContent/ArticleContent'
 import timeLine from '../components/pages/TimeLine/TimeLine'
 import hotSpot from '../components/pages/HotSpot/HotSpot'
@@ -25,6 +26,11 @@ export const constantRouterMap = [
     path: '/login',
     name: 'login',
     component: login
+  },
+  {
+    path: '/signUp',
+    name: 'signUp',
+    component: signUp
   },
   {
     path: '/writeArticle',

@@ -44,7 +44,7 @@ export default {
       currentPage: 1,
       pageSize: 5,
       articleList: [],
-      queryArticleListByVisitsUrl: '/blog/queryArticleListByVisits'
+      queryArticleListByVisitsUrl: '/article/queryArticleListByVisits'
     }
   },
   mounted () {

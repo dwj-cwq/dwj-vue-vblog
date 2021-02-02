@@ -5,12 +5,17 @@
         <div class="logo-wrapper clearfix">
           <router-link :to="{ name: 'index'}" class="logo">博客</router-link>
         </div>
+        <div class="login-register-wrapper" >
+          <span>
+            <el-button size="medium" class="nav-btn" @click="toSignUpPage()">注册</el-button>
+          </span>
+        </div>
       </div>
     </nav>
     <div class="login-container">
       <div class="login-box">
         <div class="login-title">
-          <h2>Remango-Blog 登录平台</h2>
+          <h2>dwj-vBlog 登录平台</h2>
           <p>基于element-ui的极致体验</p>
         </div>
         <div class="login-form-wrapper">
@@ -57,12 +62,12 @@
 </template>
 
 <script>
-import qs from 'qs'
 import {sha256} from 'js-sha256'
 export default {
   name: 'login',
   data () {
-    let staticImgUrl = '/blog/captcha/get?'
+    let baseUrl = process.env.RESTAPI_PREFIX
+    let staticImgUrl = baseUrl + '/captcha/get?'
     return {
       loginForm: {
         username: '',
@@ -72,7 +77,7 @@ export default {
       isPassVerify: false,
       staticImgUrl: staticImgUrl,
       imgUrl: staticImgUrl + (new Date()).getTime(),
-      captchaVerifyUrl: '/blog/captcha/verify',
+      captchaVerifyUrl: '/captcha/verify/',
       rules: {
         username: [
           { required: true, message: '输入不能为空', trigger: 'change' }
@@ -88,7 +93,7 @@ export default {
       if (newValue.length < 5) {
         this.isPassVerify = false
       } else {
-        this.axios.post(this.captchaVerifyUrl, qs.stringify({ captcha: this.verificationCode }),
+        this.axios.post(this.captchaVerifyUrl + this.verificationCode,
           {headers: {'Content-Type': 'application/json'}}).then(response => {
           this.isPassVerify = response.data.code === 0
         }).catch(error => {
@@ -113,8 +118,13 @@ export default {
     loginSystem (formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
-          this.loginForm.password = sha256(this.loginForm.password + this.loginForm.username)
-          this.VerifyAndSetCookie(this.loginForm).then(res => {
+          let userData = {
+            username: '',
+            password: ''
+          }
+          userData.username = this.loginForm.username
+          userData.password = sha256(this.loginForm.password)
+          this.VerifyAndSetCookie(userData).then(res => {
           }).catch(error => {
             this.refreshImg()
             if (error.data) this.$message.error(error.data.errorMsg)
@@ -124,12 +134,16 @@ export default {
     },
     async VerifyAndSetCookie (loginForm) {
       let res = await this.$store.dispatch('Login', loginForm)
+      console.log(res)
       if (res.data.code !== 0) {
         this.$message.error(res.data.errorMsg)
       } else {
         await this.$store.dispatch('GetInfo')
         this.$router.push({name: 'index'})
       }
+    },
+    toSignUpPage () {
+      this.$router.push({name: 'signUp'})
     }
   }
 }

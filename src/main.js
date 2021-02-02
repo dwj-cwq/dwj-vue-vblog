@@ -12,6 +12,8 @@ import 'element-ui/lib/theme-chalk/index.css'
 import '@/permission'
 import infiniteScroll from 'vue-infinite-scroll'
 
+axios.defaults.withCredentials = true
+
 Vue.prototype.axios = axios
 
 Vue.use(infiniteScroll)

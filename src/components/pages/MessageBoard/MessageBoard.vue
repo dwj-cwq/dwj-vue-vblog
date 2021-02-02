@@ -9,7 +9,7 @@
           <span class="red">留</span>
           <span class="yellow">言</span>
           <span  class="blue">板</span></h1>
-        <p class="subtitle">您对网站有什么建议或是有什么想对remango说的</p>
+        <p class="subtitle">您对网站有什么建议或是有什么想对dwj说的</p>
         <el-form :model="messageBoardForm" :rules="rules" ref="messageBoardForm" class="reply-form">
           <el-form-item prop="username">
             <el-input v-model="messageBoardForm.username" placeholder="昵称" :disabled="checked" maxlength="20"></el-input>
@@ -96,8 +96,8 @@ export default {
           { required: true, message: '请输入昵称' }]
       },
       messageList: [],
-      getMessageBoardUrl: '/blog/getMessageBoard',
-      saveMessageBoardUrl: '/blog/saveMessageBoard'
+      getMessageBoardUrl: '/messageBoard/getMessageBoard',
+      saveMessageBoardUrl: '/messageBoard/saveMessageBoard'
     }
   },
   mounted () {

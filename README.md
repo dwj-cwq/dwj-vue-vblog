@@ -1,3 +1,4 @@
+
 # 项目说明
 基于作者 @REmango 开发的 Remango-Blog 项目基础重构开发。
 
@@ -8,7 +9,7 @@
 
 ## 后端代码地址
 
-[后端代码导航](https://github.com/648752437/spring-boot-vblog.git)
+[后端代码导航](https://github.com/dwj-cwq/spring-boot-vblog.git)
 
 ## 主要技术栈
 
@@ -69,22 +70,22 @@
 
 #### 文章阅读界面
 
-<img src="https://github.com/REmango/vue-blog/blob/master/screenshot/article.png" width="500" height="250"/>
+<img src="https://github.com/dwj-cwq/dwj-vue-vblog/blob/master/screenshot/article.png" width="500" height="250"/>
 
 #### 首页
 
-<img src="https://github.com/REmango/vue-blog/blob/master/screenshot/index.png" width="500" height="250"/>
+<img src="https://github.com/dwj-cwq/dwj-vue-vblog/blob/master/screenshot/index.png" width="500" height="250"/>
 
 #### 登录界面
 
-<img src="https://github.com/REmango/vue-blog/blob/master/screenshot/login.png" width="500" height="250"/>
+<img src="https://github.com/dwj-cwq/dwj-vue-vblog/blob/master/screenshot/login.png" width="500" height="250"/>
 
 
 
 ## 开发
 
 ```
-git clone https://github.com/648752437/dwj-vblog-web.git
+git clone https://github.com/dwj-cwq/dwj-vblog-web.git
 
 cd vue-blog
 

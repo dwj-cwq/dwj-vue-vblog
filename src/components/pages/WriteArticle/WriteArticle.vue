@@ -6,7 +6,7 @@
           <router-link :to="{ name: 'index'}" class="logo">博客</router-link>
         </div>
         <div class="login-register-wrapper">
-          <el-button size="medium" class="nav-btn" @click="toLoginPage()">登录</el-button>
+          <el-button size="medium" class="nav-btn" @click="toLoginPage()" v-if="isLogin">登录</el-button>
         </div>
         <div class="main-container">
           <div class="welcome">Record  your  Idea</div>
@@ -59,17 +59,19 @@
 <script>
 import qs from 'qs'
 import utils from '@/utils/utils'
+import { getToken } from '@/utils/auth'
 import { mapState } from 'vuex'
 export default {
   name: 'write-article',
   data () {
     return {
+      isLogin: false,
       articleTitle: '',
       markdownObj: null,
       intervalId: null,
       dialogVisible: false,
       articleTypeList: [{type: '原创'}, {type: '转载'}],
-      getCurrentUserUrl: '/blog/getCurrentUser',
+      getCurrentUserUrl: '/user/getCurrentUser',
       articleInfoForm: {
         checkedTags: [],
         author: '',
@@ -86,7 +88,7 @@ export default {
           { required: true, message: '请选择文章类型', trigger: 'change' }
         ]
       },
-      publishArticleUrl: '/blog/publishArticle'
+      publishArticleUrl: '/article/publishArticle'
     }
   },
   computed: {
@@ -95,6 +97,7 @@ export default {
     })
   },
   mounted () {
+    this.initHeader()
     this.loadCache()
     this.initMarkdown()
     this.articleCache()
@@ -103,12 +106,17 @@ export default {
     clearInterval(this.intervalId)
   },
   methods: {
+    initHeader () {
+      if (getToken) {
+        this.isLogin = true
+      }
+    },
     loadCache () {
-      this.$refs.markdownText.innerText = utils.fetchData('remango-blog')
+      this.$refs.markdownText.innerText = utils.fetchData('vblog')
     },
     articleCache () {
       this.intervalId = setInterval(() => {
-        utils.saveData('remango-blog', this.$refs.markdownText.innerText)
+        utils.saveData('vblog', this.$refs.markdownText.innerText)
       }, 5000)
     },
     initMarkdown () {
@@ -127,7 +135,7 @@ export default {
         htmlDecode: true, // 不过滤标签
         imageUpload: true, // 上传图片
         imageFormats: ['jpg', 'jpeg', 'gif', 'png', 'bmp', 'webp', 'JPG', 'JPEG', 'GIF', 'PNG', 'BMP', 'WEBP'],
-        imageUploadURL: '/blog/uploadImage',
+        imageUploadURL: '/api/article/uploadImage',
         onload: function () {
           // console.log('onload', this);
         },
@@ -148,7 +156,7 @@ export default {
           })
           return
         }
-        this.articleInfoForm.author = response.data.data.username
+        this.articleInfoForm.author = response.data.data.userName
         if (!this.$refs.markdownContent.innerText || !this.articleTitle) {
           this.$alert('请填写标题或文章内容', '提示', {
             confirmButtonText: '确定',
@@ -183,7 +191,7 @@ export default {
             this.articleTitle = ''
             this.resetForm('articleInfoForm')
             this.$refs.markdownText.innerText = ''
-            utils.saveData('remango-blog', '')
+            utils.saveData('vblog', '')
             this.dialogVisible = false
             this.$alert('已发布，前往首页！', '提示', {
               confirmButtonText: '确定',

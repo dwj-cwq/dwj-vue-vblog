@@ -122,7 +122,7 @@ export default {
         { label: '留言板', icon: 'icon-liuyan1', id: 2 },
         { label: '关于我', icon: 'icon-guanyuwomen', id: 3 }
       ],
-      articlesUrl: '/blog/queryArticles'
+      articlesUrl: '/article/queryArticles'
     }
   },
   computed: {
@@ -174,6 +174,9 @@ export default {
     },
     toLoginPage () {
       this.$router.push({name: 'login'})
+    },
+    toSignUpPage () {
+      this.$router.push({name: 'signUp'})
     },
     handleSizeChange (val) {
       this.pagination.pageSize = val
