@@ -232,6 +232,10 @@ export default {
       position: relative;
       .blog-list{
         .blog-item{
+          padding: 0px;
+          border-radius: 10px;
+          border: 0px solid #eee;
+          box-shadow: 0px 5px 15px #eee;
           .blog-title{
             display: block;
             font-size: 18px;
@@ -267,17 +271,20 @@ export default {
       width: 30%;
       flex-basis: 30%;
       margin-left: 6%;
-      .box-card{
-        margin-bottom: 30px;
-        border-radius: 4%;
-        border: 1px solid #eee;
-        transition: box-shadow 0.3s;
-        -webkit-transition: box-shadow 0.3s;
-      }
       .quote{
         text-indent: 2em;
         line-height: 1.6;
       }
+    }
+  }
+  .box-card{
+    margin-bottom: 30px;
+    border-radius: 10px;
+    border: 1px solid #eee;
+    transition: all box-shadow 0.4s;
+    -webkit-transition: all box-shadow 0.4s;
+    &:hover{
+      box-shadow: 15px 15px 10px #eee;
     }
   }
   /*canva样式*/
