@@ -12,26 +12,28 @@
         </div>
         <div class="blog-container">
           <div class="blog-content-wrapper" >
-            <ul class="blog-list" v-if="articlesList.length > 0">
-              <li class="blog-item" v-for="article in articlesList" :key="article.id">
-                <el-card class="box-card" shadow="hover">
-                  <a class="blog-title" @click="toArticleContentPage(article.articleId, article.author)">{{article.articleTitle}}</a>
-                  <div class="blog-info">
-                  <span class="blog-info-item">
-                    <i class="icon iconfont icon-yonghutouxiang"></i> {{article.author}}
-                  </span>
-                    <span class="blog-info-item" v-if="article.createTime">
-                    <i class="icon iconfont icon-rili1"></i> {{getFormatDate(article.createTime)}}
-                  </span>
+            <el-row class="blog-list" v-if="articlesList.length > 0">
+              <el-col class="blog-item" :span="10" v-for="article in articlesList" :key="article.id" @click.native="toArticleContentPage(article.articleId, article.author)">
+                <el-card class="box-card" shadow="hover" :body-style="{padding: '0px'}">
+                  <img class="sansheng" src="@/common/img/sansheng.jpg"/>
+                  <div style="padding: 14px;">
+                    <a class="blog-title">{{article.articleTitle}}</a>
+                    <div class="blog-info">
                     <span class="blog-info-item">
-                    <i class="icon iconfont icon-biaoqian"></i> {{getCategoriesList(article.categories)}}
-                  </span>
+                      <i class="icon iconfont icon-yonghutouxiang"></i> {{article.author}}
+                    </span>
+                      <span class="blog-info-item" v-if="article.createTime">
+                      <i class="icon iconfont icon-rili1"></i> {{getFormatDate(article.createTime)}}
+                    </span>
+                      <span class="blog-info-item">
+                      <i class="icon iconfont icon-biaoqian"></i> {{getCategoriesList(article.categories)}}
+                    </span>
+                    </div>
+                    <p class="blog-summary">{{article.summary + '...'}}</p>
                   </div>
-                  <p class="blog-summary">{{article.summary + '...'}}
-                  </p>
                 </el-card>
-              </li>
-            </ul>
+              </el-col>
+            </el-row>
             <div v-else>{{searchMsg}}</div>
           </div>
           <div class="blog-sidebar-wrapper">
@@ -47,7 +49,7 @@
                 </ul>
               </div>
             </el-card>
-            <el-card class="box-card" shadow="hover">
+            <el-card class="box-card" shadow="hover" style="margin-top: 30px">
               <div slot="header" class="clearfix">
                 <span>今日份鸡汤</span>
               </div>
@@ -208,6 +210,7 @@ export default {
   @import '../common/css/theme';
   .main-container{
     margin-top: 20px;
+    width: 90%;
   }
   .index-page-container{
     opacity: 0;
@@ -226,16 +229,19 @@ export default {
     justify-content:space-between;
     margin-top: 30px;
     .blog-content-wrapper{
-      flex: 1;
-      width: 65%;
-      flex-basis: 65%;
+      width: 85%;
+      flex-basis: 85%;
       position: relative;
       .blog-list{
         .blog-item{
+          flex: 1;
+          cursor: pointer;
           padding: 0px;
           border-radius: 10px;
           border: 0px solid #eee;
-          box-shadow: 0px 5px 15px #eee;
+          box-shadow: 0px 30px 20px -10px #eee;
+          margin-right: 40px;
+          margin-bottom: 40px;
           .blog-title{
             display: block;
             font-size: 18px;
@@ -270,7 +276,6 @@ export default {
       flex: 1;
       width: 30%;
       flex-basis: 30%;
-      margin-left: 6%;
       .quote{
         text-indent: 2em;
         line-height: 1.6;
@@ -278,14 +283,20 @@ export default {
     }
   }
   .box-card{
-    margin-bottom: 30px;
     border-radius: 10px;
     border: 1px solid #eee;
-    transition: all box-shadow 0.4s;
-    -webkit-transition: all box-shadow 0.4s;
+    transition: all box-shadow 0.5s;
+    -webkit-transition: all box-shadow 0.5s;
     &:hover{
-      box-shadow: 15px 15px 10px #eee;
+      box-shadow: 0px 20px 20px 10px #eee;
+      transform: translate(0,-5px);
     }
+  }
+  .sansheng {
+    height: 200px;
+    width: 100%;
+    bottom: 0;
+    padding: 0px;
   }
   /*canva样式*/
   .canvas-wrapper{
@@ -330,6 +341,7 @@ export default {
         flex-basis: 50%;
         height: 32px;
         line-height: 32px;
+        margin-bottom: 5px;
         .tags-link-wrapper{
           .tags-link{
             &:hover{
