@@ -5,8 +5,8 @@
         <div class="logo-wrapper clearfix">
           <router-link :to="{ name: 'index'}" class="logo">博客</router-link>
         </div>
-        <div class="login-register-wrapper">
-          <el-button size="medium" class="nav-btn" @click="toLoginPage()" v-if="isLogin">登录</el-button>
+        <div class="login-register-wrapper" v-show="!isLogin">
+          <el-button size="medium" class="nav-btn" @click="toLoginPage()">登录</el-button>
         </div>
         <div class="main-container">
           <div class="welcome">Record  your  Idea</div>
@@ -107,7 +107,7 @@ export default {
   },
   methods: {
     initHeader () {
-      if (getToken) {
+      if (getToken()) {
         this.isLogin = true
       }
     },

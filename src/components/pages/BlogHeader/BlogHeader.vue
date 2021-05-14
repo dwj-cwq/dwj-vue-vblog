@@ -76,11 +76,23 @@
         <li class="nav-menu">
           <router-link :to="{ name: 'writeArticle'}" class="nav-menu-link"><i class="icon iconfont icon-xiepinglun"></i>写博客</router-link>
         </li>
-        <li class="nav-menu">
+        <li class="nav-menu" v-if="!isShowUser">
           <router-link :to="{ name: 'login'}" class="nav-menu-link"><i class="icon iconfont icon-denglu"></i>登录</router-link>
         </li>
-        <li class="nav-menu">
+        <li class="nav-menu" v-if="!isShowUser">
           <router-link :to="{ name: 'signUp'}" class="nav-menu-link"><i class="icon iconfont icon-yonghu"></i>注册</router-link>
+        </li>
+        <li class="nav-menu" v-if="isShowUser">
+          <a class="nav-menu-link" href="#"><i class="icon iconfont icon-user-s"></i>{{username}}</a>
+        </li>
+        <li class="nav-menu" v-if="isShowUser">
+          <a class="nav-menu-link" href="#"><i class="icon iconfont icon-iconset"></i>账号设置</a>
+        </li>
+        <li class="nav-menu" v-if="isShowUser">
+          <a class="nav-menu-link" href="#"><i class="icon iconfont icon-shuju"></i>后台管理</a>
+        </li>
+        <li class="nav-menu" v-if="isShowUser">
+          <a class="nav-menu-link" href="#" @click="logout"><i class="icon iconfont icon-tuichu"></i>注销</a>
         </li>
       </ul>
     </div>
@@ -169,7 +181,7 @@ export default {
     }
   }
   .open-menu.nav-menu-wrapper{
-    height: 330px;
+    height: 425px;
     visibility: visible;
     transition: all .6s linear;
   }

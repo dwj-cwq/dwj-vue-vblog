@@ -25,7 +25,7 @@
                   placeholder="用户名"
                   prefix-icon="fa-user fa"
                   v-model="signUpForm.userName">
-                </el-input> <i class="warn" v-if="nameWarn">用户名已被使用！</i>
+                </el-input>
               </el-form-item>
               <el-form-item prop="email">
                 <el-input
@@ -54,7 +54,6 @@
                   :prefix-icon="isPassVerify? 'fa fa-check': 'fa fa-lock'"
                   v-model="signUpForm.password1">
                 </el-input>
-                <i v-if="warn">两次输入的密码不同，请重新输入！</i>
               </el-form-item>
               <el-form-item>
                 <el-button type="primary" @click="signUpSystem('signUpForm')" class="signUp-button">Sign up</el-button>
@@ -76,8 +75,6 @@ export default {
       mageUploadURL: '/api/article/uploadImage',
       signUpUrl: '/user/signUp',
       isPassVerify: false,
-      warn: false,
-      nameWarn: false,
       signUpForm: {
         userName: '',
         email: '',
@@ -113,10 +110,9 @@ export default {
       this.$refs[formName].validate(valid => {
         if (valid) {
           if (this.signUpForm.password1 !== this.signUpForm.userPassword) {
-            this.warn = true
+            this.$message.error('两次输入密码不一致')
           } else {
             this.isPassVerify = true
-            this.warn = false
             this.axios.post(this.signUpUrl, this.signUpForm,
               {headers: {'Content-Type': 'application/json'}}).then(response => {
               if (response.data.code === 0) {
@@ -124,9 +120,8 @@ export default {
               }
             }).catch(error => {
               if (error.data.code === 1009) {
-                this.nameWarn = true
+                this.$message.error('该用户名已存在')
               }
-              console.log(error)
             })
           }
         }

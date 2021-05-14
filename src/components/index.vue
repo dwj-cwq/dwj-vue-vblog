@@ -19,15 +19,15 @@
                   <div style="padding: 14px;">
                     <a class="blog-title">{{article.articleTitle}}</a>
                     <div class="blog-info">
-                    <span class="blog-info-item">
-                      <i class="icon iconfont icon-yonghutouxiang"></i> {{article.author}}
-                    </span>
-                      <span class="blog-info-item" v-if="article.createTime">
-                      <i class="icon iconfont icon-rili1"></i> {{getFormatDate(article.createTime)}}
-                    </span>
                       <span class="blog-info-item">
-                      <i class="icon iconfont icon-biaoqian"></i> {{getCategoriesList(article.categories)}}
-                    </span>
+                        <i class="icon iconfont icon-yonghutouxiang"></i> {{article.author}}
+                      </span>
+                        <span class="blog-info-item" v-if="article.createTime">
+                        <i class="icon iconfont icon-rili1"></i> {{getFormatDate(article.createTime)}}
+                      </span>
+                        <span class="blog-info-item">
+                        <i class="icon iconfont icon-biaoqian"></i> {{getCategoriesList(article.categories)}}
+                      </span>
                     </div>
                     <p class="blog-summary">{{article.summary + '...'}}</p>
                   </div>
@@ -37,7 +37,7 @@
             <div v-else>{{searchMsg}}</div>
           </div>
           <div class="blog-sidebar-wrapper">
-            <el-card class="box-card" shadow="hover">
+            <el-card class="box-card" shadow="always">
               <div slot="header" class="clearfix">
                 <span>常用标签</span>
               </div>
@@ -49,7 +49,7 @@
                 </ul>
               </div>
             </el-card>
-            <el-card class="box-card" shadow="hover" style="margin-top: 30px">
+            <el-card class="box-card" shadow="always" style="margin-top: 30px">
               <div slot="header" class="clearfix">
                 <span>今日份鸡汤</span>
               </div>
@@ -248,7 +248,6 @@ export default {
             font-weight: 600;
             color: #495969;
             line-height: 1.5;
-            margin-bottom: 8px;
             &:hover{
               opacity: .8;
             }
@@ -257,13 +256,14 @@ export default {
             color: #777;
             margin-bottom: 8px;
             line-height: 1.75;
+            height: 40px;
           }
           .blog-info{
             font-size: 12px;
             color: #777;
             margin-bottom: 15px;
             .blog-info-item{
-              margin-right: 20px;
+              margin-right: 10px;
               .iconfont{
                 font-size: 12px;
               }
@@ -285,7 +285,7 @@ export default {
   .box-card{
     border-radius: 10px;
     border: 1px solid #eee;
-    transition: all box-shadow 0.5s;
+     transition: all box-shadow 0.5s;
     -webkit-transition: all box-shadow 0.5s;
     &:hover{
       box-shadow: 0px 20px 20px 10px #eee;

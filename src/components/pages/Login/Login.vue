@@ -127,14 +127,13 @@ export default {
           this.VerifyAndSetCookie(userData).then(res => {
           }).catch(error => {
             this.refreshImg()
-            if (error.data) this.$message.error(error.data.errorMsg)
+            if (error.data) this.$message.error(error.data.msg)
           })
         }
       })
     },
     async VerifyAndSetCookie (loginForm) {
       let res = await this.$store.dispatch('Login', loginForm)
-      console.log(res)
       if (res.data.code !== 0) {
         this.$message.error(res.data.errorMsg)
       } else {

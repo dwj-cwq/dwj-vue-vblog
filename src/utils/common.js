@@ -180,66 +180,7 @@ export function errorTip (self, error, errorMessage) {
   return message
 }
 
-function translate (message) {
-  if (message.indexOf('timeout') !== -1) {
-    return '请求超时'
-  } else if (message.indexOf('Network Error') !== -1) {
-    return '网络错误'
-  } else if (message.indexOf('Unauthorized') !== -1) {
-    return '认证失败'
-  } else if (message.indexOf('Kpi does not exist') !== -1) {
-    return 'Kpi不存在'
-  } else if (message.indexOf('Kpi: name already exist') !== -1) {
-    return 'Kpi名称已存在'
-  } else if (message.indexOf('Name already existed') !== -1) {
-    return '名称已存在'
-  } else if (message.indexOf('taskError') === 0) {
-    return message.replace('taskError', '错误')
-  } else if (message.indexOf('user already existed') !== -1) {
-    return message.replace('user already existed', '用户已存在')
-  } else if (message.indexOf('simpleTrain') === 0) {
-    return message.replace('simpleTrain.', '训练错误: ')
-  } else if (message.indexOf('Activated kpi can not be deleted') !== -1) {
-    return 'Kpi已激活，无法删除，请先停用Kpi后再删除'
-  } else if (message.indexOf('A JSONObject text must begin with') !== -1) {
-    return '无效的JSON Object'
-  } else if (message.startsWith('#')) {
-    return message.replace(/#([^\n]+): expected type: (\S+), found: (\S+)/, '$1: $3, 期望 $2 类型')
-                  .replace(/#: required key \[(\S+)\] not found/, '缺失必要字段: $1')
-                  .replace(/#.*?: extraneous key \[(\S+)\] is not permitted/, '存在无关字段: $1')
-                  .replace(/#: (\d+) schema violations found/, '发现 $1 个不合法设置')
-  } else {
-    return '出错了，请重试'
-  }
+// return last web
+export function routerback () {
+  this.$router.back(-1)
 }
-
-// 指标等文案翻译
-export function translateColumnText (text, type = 'metric') {
-  if (type === 'metric') {
-    return MetricMaps[text] ? `${MetricMaps[text]}` : text
-  }
-  return text
-}
-// 通配符转换为正则
-export function wildcardToRegex (glob) {
-  let result = '^'
-  let i = 0
-  while (i < glob.length) {
-    let c = glob.charAt(i)
-    switch (c) {
-      case '*': result += '.*'; break
-      case '?': result += '.'; break
-      case '^': result += '\\^'; break
-      case '.': result += '\\.'; break
-      case '\\': result += '\\\\'; break
-      default: result += c; break
-    }
-    i += 1
-  }
-  result += '$'
-  return result
-}
-// event bus
-export const eventBus = new Vue()
-// 嵌入平台化日志分析结果的页面前缀
-export const AIOPS_WEB_PREFIX = process.env.AIOPS_WEB_PREFIX
